@@ -1,26 +1,156 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #212529;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.card {
+  border-radius: 12px;
+}
+
+img {
+  display: block;
+}
+
+
+.event-card {
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.event-card-row {
+  height: 100%;
+}
+
+.event-card-image-wrapper {
+  height: 100%;
+  padding: 0;
+}
+
+.event-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  max-width: none;
+}
+
+.navbar-compact {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.navbar-compact .navbar-brand {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-right: 12px;
+}
+
+.navbar-compact .form-control {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-size: 15px;
+}
+
+.appointment-card {
+  display: flex;
+  gap: 20px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 2px solid #198754;
+  background: #e9f9f0;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.appointment-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.appointment-card.selected {
+  outline: 3px solid #0d6efd;
+}
+
+.appointment-date-range {
+  display: flex;
+  align-items: center;
+}
+
+.date-box {
+  width: 72px;
+  height: 88px;
+  background: #2d9cdb;
+  color: white;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.date-box .day {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.date-box .month {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.date-box .year {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.date-separator {
+  margin: 0 12px;
+  font-weight: 600;
+}
+
+.appointment-details {
+  flex: 1;
+  display: grid;
+  row-gap: 6px;
+}
+
+.appointment-location,
+.appointment-time,
+.appointment-availability,
+.appointment-cancellation-deadline {
+  font-size: 14px;
+  color: #333;
+}
+
+.appointment-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #198754;
+}
+
+.appointment-actions {
+  display: flex;
+  align-items: center;
+}
+
+.appointment-actions .badge {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.appointment-card:has(.bg-danger),
+.appointment-card:has(.bg-secondary) {
+  background: #f8f9fa;
+  border-color: #ced4da;
+  opacity: 0.85;
 }
