@@ -1,6 +1,8 @@
 "use client";
 
 import { Appointment } from "@/types/appointment";
+import { useRouter } from "next/navigation";
+
 
 type Props = {
   appointment: Appointment | null;
@@ -14,6 +16,7 @@ export default function PricingBox({ appointment }: Props) {
   const price = appointment.price ?? 0;
   const depositPercent = appointment.depositPercent ?? 30;
   const deposit = (price * depositPercent) / 100;
+  const router = useRouter();
 
   return (
     <>
@@ -26,11 +29,35 @@ export default function PricingBox({ appointment }: Props) {
         <p>€ {deposit.toFixed(2)}</p>
 
         <button
-        className="btn btn-primary w-100 mt-3"
-        disabled={
-            appointment.status !== "ACTIVE" ||
-            (appointment.availableSlots ?? 0) <= 0
-        }
+            className={`btn w-100 mt-3 ${
+                appointment.status !== "ACTIVE" ||
+                (appointment.availableSlots ?? 0) <= 0
+                    ? "btn-secondary"
+                    : "btn-primary"
+            }`}
+            disabled={
+                appointment.status !== "ACTIVE" ||
+                (appointment.availableSlots ?? 0) <= 0
+            }
+            onClick={() => {
+                if (
+                appointment.status !== "ACTIVE" ||
+                (appointment.availableSlots ?? 0) <= 0
+                ) {
+                return;
+                }
+
+                sessionStorage.setItem(
+                "bookingAppointmentId",
+                String(appointment.id)
+                );
+                sessionStorage.setItem(
+                "bookingEventId",
+                String(appointment.eventId)
+                );
+
+                router.push(`/booking/${appointment.id}`);
+            }}
         >
         {appointment.status !== "ACTIVE"
             ? appointment.status
